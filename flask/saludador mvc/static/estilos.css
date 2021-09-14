@@ -1,0 +1,14 @@
+body {
+	background-color: #ffffaa;
+	font-size: 10px;
+}
+
+h1 {
+	border: 1px black solid;
+	padding: 10px;
+}
+
+tr {
+	border: 1px black solid;
+	padding: 10px;	
+}
