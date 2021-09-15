@@ -1,0 +1,37 @@
+from flask import Flask, render_template, redirect, request, url_for
+from modelo import *
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def inicio():
+    return render_template('inicio.html')
+
+@app.route('/listar')
+def listar():
+    data = consultar()
+    return render_template('listar.html', data = data)
+
+@app.route('/agregar', methods = ['POST', 'GET'])
+def agregar():
+    if request.method == 'GET':
+        return render_template('agregar.html')
+    else:
+        info = request.form
+        data = {
+            'nombre': info['nombre'],
+            'apellido': info['apellido'],
+            'ciudad': info['ciudad']
+        }
+        insertar(data)
+        return redirect(url_for('listar'))
+
+@app.route('/eliminar/<id>')
+def eliminar(id):
+    eliminar_porid(id)
+    return redirect(url_for('listar'))
+
+
+if __name__ == '__main__':
+    app.run()

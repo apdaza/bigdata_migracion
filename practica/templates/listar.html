@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<body>
+	<h1>Listar datos</h1>
+	<a href="/listar">Lista de datos</a>
+	<a href="/agregar">Agregar datos</a>
+
+	<table border=1>
+	{% for d in data %}
+	<tr>
+		<td>{{ d['nombre'] }}</td>
+		<td>{{ d['apellido'] }}</td>
+		<td>{{ d['ciudad'] }}</td>
+		<td><a href="/eliminar/{{ d['_id'] }}">X</a></td>
+	</tr>
+	{% endfor %}
+	</table>
+</body>
+</html>

@@ -1,4 +1,5 @@
 import pymongo
+from bson import ObjectId
 
 HOST = "127.0.0.1"
 PORT = "27017"
@@ -14,15 +15,19 @@ try:
 except pymongo.errors.ConnectionFailure as error:
     print("No se puede conectar a Mongo", error)
 
-data = [
-        {'nombre': 'Juan', 'apellido': 'Perez', 'ciudad': 'Bogotá'},
-        {'nombre': 'Ana', 'apellido': 'Diaz', 'ciudad': 'Cota'},
-        {'nombre': 'Maria', 'apellido': 'Perez', 'ciudad': 'Zipa'}
-    ]    
-
 try:
     coleccion = cliente[DATABASE][COLLECTION]
-    coleccion.insert_many(data)
-    print("data insertada")
+    condicion = {'apellido': {'$regex': '^D'}}
+    coleccion.delete_many(condicion)
+    
+    resultado = coleccion.find({})
+    if resultado is None:
+        print("No hay datos")
+    else:
+        for e in resultado:
+            for k in e:
+                print(k + ": \t\t" + str(e[k]))
+            print("")
+    
 except Exception as error:
-    print("Error insertando datos", error)
+    print("Error consultando datos", error)
