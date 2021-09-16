@@ -60,4 +60,43 @@ def eliminar_porid(id):
         
     except Exception as error:
         print("Error consultando datos", error)
-    
+
+def consultar_porid(id):
+    data = {}
+    try:
+        cliente = pymongo.MongoClient(URI_CONEXION)
+        cliente.server_info()
+        print("Conexión OK")
+        cliente.close()
+    except pymongo.errors.ConnectionFailure as error:
+        print("No se puede conectar a Mongo", error)
+
+    try:
+        coleccion = cliente[DATABASE][COLLECTION]
+        condicion = {'_id':ObjectId(id)}
+        resultado = coleccion.find_one(condicion)
+        data = resultado
+    except Exception as error:
+        print("Error consultando datos", error)
+
+    finally:
+        return data
+
+def actualizar(id, data):
+    try:
+        cliente = pymongo.MongoClient(URI_CONEXION)
+        cliente.server_info()
+        print("Conexión OK")
+        cliente.close()
+    except pymongo.errors.ConnectionFailure as error:
+        print("No se puede conectar a Mongo", error)
+
+    try:
+        coleccion = cliente[DATABASE][COLLECTION]
+        condicion = {'_id': ObjectId(id)}
+        valores = {'$set': data}
+        coleccion.update_one(condicion, valores)
+        
+    except Exception as error:
+        print("Error actualizando datos", error)
+

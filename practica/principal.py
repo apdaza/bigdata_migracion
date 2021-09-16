@@ -32,6 +32,20 @@ def eliminar(id):
     eliminar_porid(id)
     return redirect(url_for('listar'))
 
+@app.route('/editar/<id>', methods = ['POST', 'GET'])
+def editar(id):
+    if request.method == 'GET':
+        data = consultar_porid(id)
+        return render_template('editar.html', data = data)
+    else:
+        info = request.form
+        data = {
+            'nombre': info['nombre'],
+            'apellido': info['apellido'],
+            'ciudad': info['ciudad']
+        }
+        actualizar(id, data)
+        return redirect(url_for('listar'))
 
 if __name__ == '__main__':
     app.run()

@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<body>
+	<h1>Editar datos</h1>
+	<a href="/listar">Lista de datos</a>
+	<a href="/agregar">Agregar datos</a>
+
+	<form action="/editar/{{ data['_id'] }}" method="POST">
+		Nombre: <input type="text" name="nombre" value="{{ data['nombre'] }}"><br>
+		Apellido: <input type="text" name="apellido" value="{{ data['apellido'] }}"><br>
+		Ciudad: <input type="text" name="ciudad" value="{{ data['ciudad'] }}"><br>
+		<input type="submit" name="enviar" value="enviar">
+
+	</form>
+</body>
+</html>
