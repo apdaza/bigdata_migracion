@@ -4,24 +4,38 @@ body {
 
 img {
 	float: right;
+	filter: drop-shadow(5px 5px 10px #99A3A4);
 }
 
 table {
 	float: left;
 	border: none;
+	border-collapse: collapse; 
+	filter: drop-shadow(5px 5px 10px #99A3A4);
+}
+/* Zebra striping */
+tr:nth-of-type(odd) { 
+	background: #EBF5FB; 
+}
+th { 
+	background: #34495E; 
+	color: #99A3A4; 
+	font-weight: bold; 
+	font-style: italic;
+}
+td, th { 
+	padding: 6px; 
+	border: 1px solid #ccc; 
+	text-align: left; 
+}
+th:first-child {
+	border-radius: 6px 0 0 0;
 }
 
-tr {
-	background-color: #eeeeff;
-	margin: 0.2em;
+th:last-child {
+	border-radius: 0 6px 0 0;
 }
 
-th {
-	color: navy;
-	font-weight: bolder;
-}
-
-td {
-	font-size: 0.8em;
-	padding: 0.5em;
+th:only-child{
+	border-radius: 6px 6px 0 0;
 }
