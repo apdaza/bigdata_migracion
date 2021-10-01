@@ -18,7 +18,11 @@ def imagenes(tipo):
         url_img, df = resumen_contagio()
     if tipo == 'sexo':
         url_img, df = resumen_sexo()
-    
+    if tipo == 'edad':
+        url_img, df = resumen_edad()
+    else:
+        url_img, df = resumen_dispersion()
+        
     return render_template(
                     'imagenes.html',
                     imagen = url_img,

@@ -89,3 +89,29 @@ def resumen_sexo():
     url_img = base64.b64encode(img.getvalue()).decode()
 
     return url_img, df
+
+def resumen_edad():
+    df = covid_df['Edad'].value_counts()
+    df.plot.hist()
+
+    img = io.BytesIO()
+    plt.savefig(img, format='png')
+    img.seek(0)
+
+    url_img = base64.b64encode(img.getvalue()).decode()
+
+    return url_img, df.to_frame()
+
+def resumen_dispersion():
+    df = covid_df.groupby(['Nombre departamento'])['ID de caso'].count().reset_index()
+    df.columns = ['departamento', 'casos']
+    df.index = df['departamento']
+    pd.plotting.lag_plot(df['casos'], lag=1)
+
+    img = io.BytesIO()
+    plt.savefig(img, format='png')
+    img.seek(0)
+
+    url_img = base64.b64encode(img.getvalue()).decode()
+
+    return url_img, df
